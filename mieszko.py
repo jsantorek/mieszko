@@ -1,40 +1,16 @@
+import RPi.GPIO as GPIO
 import time
-from driver.pololu_drv8835_rpi import motors, MAX_SPEED
 
-print("Starting")
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(25, GPIO.OUT, initial=GPIO.HIGH)
 
-# Set up sequences of motor speeds.
-test_forward_speeds = list(range(0, MAX_SPEED, 1)) + \
-                      [MAX_SPEED] * 200 + list(range(MAX_SPEED, 0, -1)) + [0]
+time.sleep(1)
+GPIO.output(25, GPIO.LOW)
 
-test_reverse_speeds = list(range(0, -MAX_SPEED, -1)) + \
-                      [-MAX_SPEED] * 200 + list(range(-MAX_SPEED, 0, 1)) + [0]
+time.sleep(1)
+GPIO.output(25, GPIO.HIGH)
 
-try:
-    motors.setSpeeds(0, 0)
+time.sleep(1)
+GPIO.output(25, GPIO.LOW)
 
-    print("Motor 1 forward")
-    for s in test_forward_speeds:
-        motors.motor1.setSpeed(s)
-        time.sleep(0.005)
-
-    print("Motor 1 reverse")
-    for s in test_reverse_speeds:
-        motors.motor1.setSpeed(s)
-        time.sleep(0.005)
-
-    print("Motor 2 forward")
-    for s in test_forward_speeds:
-        motors.motor2.setSpeed(s)
-        time.sleep(0.005)
-
-    print("Motor 2 reverse")
-    for s in test_reverse_speeds:
-        motors.motor2.setSpeed(s)
-        time.sleep(0.005)
-
-finally:
-    # Stop the motors, even if there is an exception
-    # or the user presses Ctrl+C to kill the process.
-    motors.setSpeeds(0, 0)
-
+GPIO.cleanup()

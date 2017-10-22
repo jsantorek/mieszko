@@ -1,0 +1,5 @@
+Used:
+https://github.com/pololu/drv8835-motor-driver-rpi
+
+Suggested:
+http://abyz.me.uk/rpi/pigpio/python.html
