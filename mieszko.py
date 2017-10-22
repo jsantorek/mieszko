@@ -1,6 +1,7 @@
-# from __future__ import print_function
 import time
 from driver.pololu_drv8835_rpi import motors, MAX_SPEED
+
+print("Starting")
 
 # Set up sequences of motor speeds.
 test_forward_speeds = list(range(0, MAX_SPEED, 1)) + \
@@ -36,3 +37,4 @@ finally:
     # Stop the motors, even if there is an exception
     # or the user presses Ctrl+C to kill the process.
     motors.setSpeeds(0, 0)
+
