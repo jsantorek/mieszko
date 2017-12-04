@@ -19,4 +19,4 @@ GPIO.cleanup()
 imu.init()
 for i in range(1000):
     print(imu.read_acc())
-
+    time.sleep(0.1)
