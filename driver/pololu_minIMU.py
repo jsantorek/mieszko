@@ -87,4 +87,9 @@ def init():
 
 
 def read_acc():
-    return bus.read_i2c_block_data(ACCELEROMETER, 0x28, 6)
+    temp = bus.read_i2c_block_data(ACCELEROMETER, 0x28, 6)
+    return [
+        (temp[1] << 8 | temp[0]),
+        (temp[3] << 8 | temp[2]),
+        (temp[5] << 8 | temp[4])
+    ]
