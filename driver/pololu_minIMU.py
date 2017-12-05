@@ -132,6 +132,6 @@ def read_mag():
 
 def to_int(high, low):
     i = (high << 8 | low)
-    if i & 0x80:
-        i -= 0x80
+    if i & 0x8000:
+        i -= 0x8000
     return i
