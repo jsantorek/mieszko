@@ -7,3 +7,8 @@ https://github.com/WiringPi/WiringPi-Python
 
 Suggested:
 http://abyz.me.uk/rpi/pigpio/python.html
+
+
+Libraries:
+
+https://github.com/pololu/lis3mdl-arduino

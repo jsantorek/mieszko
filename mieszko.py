@@ -17,6 +17,6 @@ GPIO.output(25, GPIO.LOW)
 GPIO.cleanup()
 
 imu.init()
-for i in range(1000):
-    print(imu.read_acc())
-    time.sleep(0.1)
+for i in range(100):
+    print("{} : {} : {}".format(imu.read_acc(), imu.read_gyr(), imu.read_mag()))
+    time.sleep(0.3)
