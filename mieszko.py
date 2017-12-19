@@ -32,5 +32,5 @@ for i in range(100):
     v.extend(imu.read_gyr())
     v.extend(imu.read_mag())
     v -= clb
-    print("[] => {}".format(i, v))
+    print(v)
     time.sleep(0.3)
