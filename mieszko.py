@@ -20,13 +20,17 @@ GPIO.cleanup()
 imu.init()
 clb = np.array([9, 0])
 for i in range(100):
-    v = imu.read_acc().extend(imu.read_gyr().extend(imu.read_mag()))
+    v = imu.read_acc()
+    v.extend(imu.read_gyr())
+    v.extend(imu.read_mag())
     np.append(clb, v, axis=0)
     time.sleep(0.05)
 clb = np.mean(clb, axis=0)
 
 for i in range(100):
-    v = imu.read_acc().extend(imu.read_gyr().extend(imu.read_mag()))
+    v = imu.read_acc()
+    v.extend(imu.read_gyr())
+    v.extend(imu.read_mag())
     v -= clb
     print("[] => {}".format(i, v))
     time.sleep(0.3)
