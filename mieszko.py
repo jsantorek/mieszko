@@ -28,9 +28,12 @@ for i in range(100):
 clb = np.mean(np.array(clb), axis=0)
 
 for i in range(100):
-    v = imu.read_acc()
-    v.extend(imu.read_gyr())
-    v.extend(imu.read_mag())
-    v -= clb
-    print(v)
-    time.sleep(0.3)
+    V = []
+    for j in range(5):
+        v = imu.read_acc()
+        v.extend(imu.read_gyr())
+        v.extend(imu.read_mag())
+        time.sleep(0.1)
+        V.append(v)
+    V = np.mean(np.array(V), axis=0) - clb
+    print(V)
