@@ -48,7 +48,7 @@ class Motor(object):
         io_init()
         GPIO.output(self.dir_pin, dir_value)   # wiringpi.digitalWrite(self.dir_pin, dir_value)
         pwm = GPIO.PWM(self.pwm_pin, speed)  # wiringpi.pwmWrite(self.pwm_pin, speed)
-        pwm.start()
+        pwm.start(50)
 
 class Motors(object):
     MAX_SPEED = _max_speed
