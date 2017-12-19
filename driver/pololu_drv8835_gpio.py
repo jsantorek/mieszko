@@ -18,15 +18,12 @@ def io_init():
     GPIO.setup(10, GPIO.OUT)    # wiringpi.pinMode(12, wiringpi.GPIO.PWM_OUTPUT)
     GPIO.setup(9, GPIO.OUT)     # wiringpi.pinMode(13, wiringpi.GPIO.PWM_OUTPUT)
 
+    # wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
+    # wiringpi.pwmSetRange(MAX_SPEED)
+    # wiringpi.pwmSetClock(2)
 
-
-
-    wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
-    wiringpi.pwmSetRange(MAX_SPEED)
-    wiringpi.pwmSetClock(2)
-
-    wiringpi.pinMode(5, wiringpi.GPIO.OUTPUT)
-    wiringpi.pinMode(6, wiringpi.GPIO.OUTPUT)
+    GPIO.setup(24, GPIO.OUT)    # wiringpi.pinMode(5, wiringpi.GPIO.OUTPUT)
+    GPIO.setup(25, GPIO.OUT)    # wiringpi.pinMode(6, wiringpi.GPIO.OUTPUT)
 
     io_initialized = True
 
@@ -41,24 +38,24 @@ class Motor(object):
     def setSpeed(self, speed):
         if speed < 0:
             speed = -speed
-            dir_value = 1
+            dir_value = GPIO.HIGH
         else:
-            dir_value = 0
+            dir_value = GPIO.LOW
 
         if speed > MAX_SPEED:
             speed = MAX_SPEED
 
         io_init()
-        wiringpi.digitalWrite(self.dir_pin, dir_value)
-        wiringpi.pwmWrite(self.pwm_pin, speed)
-
+        GPIO.output(self.dir_pin, dir_value)   # wiringpi.digitalWrite(self.dir_pin, dir_value)
+        pwm = GPIO.PWM(self.pwm_pin, speed)  # wiringpi.pwmWrite(self.pwm_pin, speed)
+        pwm.start()
 
 class Motors(object):
     MAX_SPEED = _max_speed
 
     def __init__(self):
-        self.motor1 = Motor(12, 5)
-        self.motor2 = Motor(13, 6)
+        self.motor1 = Motor(10, 24)
+        self.motor2 = Motor(9, 25)
 
     def setSpeeds(self, m1_speed, m2_speed):
         self.motor1.setSpeed(m1_speed)
