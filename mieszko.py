@@ -19,14 +19,16 @@ GPIO.cleanup()
 
 imu.init()
 clb = []
-for i in range(100):
+for i in range(50):
     v = imu.read_acc()
     v.extend(imu.read_gyr())
     v.extend(imu.read_mag())
     clb.append(v)
-    time.sleep(0.05)
+    time.sleep(0.1)
+print('Calibration')
+print(np.std(np.array(clb), axis=0))
+print(np.mean(np.array(clb), axis=0))
 clb = np.mean(np.array(clb), axis=0)
-
 for i in range(100):
     V = []
     for j in range(5):
