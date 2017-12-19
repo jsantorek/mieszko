@@ -10,5 +10,5 @@ http://abyz.me.uk/rpi/pigpio/python.html
 
 
 Libraries:
-
+https://github.com/pololu/lsm6-arduino
 https://github.com/pololu/lis3mdl-arduino
