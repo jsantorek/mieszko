@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import driver.pololu_minIMU as imu
+import drivers.pololu_minIMU as imu
 import numpy as np
 '''
 GPIO.setmode(GPIO.BCM)
@@ -97,4 +97,3 @@ time.sleep(3)            # Three seconds till the next change
 pwm.stop()               # Turn PWM off
 
 GPIO.cleanup()           # Always clean up at the end of programs.
-
