@@ -18,10 +18,6 @@ def io_init():
     GPIO.setup(12, GPIO.OUT)
     GPIO.setup(13, GPIO.OUT)
 
-    # wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
-    # wiringpi.pwmSetRange(MAX_SPEED)
-    # wiringpi.pwmSetClock(2)
-
     GPIO.setup(5, GPIO.OUT)
     GPIO.setup(6, GPIO.OUT)
 
@@ -32,6 +28,7 @@ class Motor(object):
     MAX_SPEED = _max_speed
 
     def __init__(self, pwm_pin, dir_pin):
+        io_init()
         self.pwm_pin = pwm_pin
         self.dir_pin = dir_pin
         self.pwm = GPIO.PWM(self.pwm_pin, 10)
@@ -47,7 +44,6 @@ class Motor(object):
         if speed > MAX_SPEED:
             speed = MAX_SPEED
 
-        io_init()
         GPIO.output(self.dir_pin, dir_value)
 
 
