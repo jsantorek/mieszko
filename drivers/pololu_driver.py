@@ -31,8 +31,7 @@ class Motor(object):
     def __init__(self, pwm_pin, dir_pin):
         io_init()
         self.dir_pin = dir_pin
-        self.pwm = GPIO.PWM(pwm_pin, 0)
-        self.pwm.start(100)
+        self.pwm = GPIO.PWM(pwm_pin, 1)
 
     def set_speed(self, speed):
         if speed < 0:
@@ -40,12 +39,15 @@ class Motor(object):
             dir_value = GPIO.HIGH
         else:
             dir_value = GPIO.LOW
-
         if speed > MAX_SPEED:
             speed = MAX_SPEED
 
         GPIO.output(self.dir_pin, dir_value)
-        self.pwm.ChangeFrequency(speed)
+        if speed > 0:
+            self.pwm.ChangeFrequency(speed)
+            self.pwm.start(100)
+        else:
+            self.pwm.stop()
 
 
 class Motors(object):
