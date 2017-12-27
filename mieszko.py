@@ -104,21 +104,21 @@ print('started')
 time.sleep(3)
 
 print('speed 1')
-drv.motors.set_speeds(1)
+drv.motors.set_speeds(drv.motors, 1, 1)
 time.sleep(3)
 
 print('speed 2')
-drv.motors.set_speeds(1)
+drv.motors.set_speeds(drv.motors, 1, 1)
 time.sleep(3)
 
 
 print('speed -1')
-drv.motors.set_speeds(1)
+drv.motors.set_speeds(drv.motors, 1, 1)
 time.sleep(3)
 
 
 print('speed -2')
-drv.motors.set_speeds(1)
+drv.motors.set_speeds(drv.motors, 1, 1)
 time.sleep(3)
 
 GPIO.cleanup()
