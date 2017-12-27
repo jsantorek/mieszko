@@ -5,16 +5,8 @@ import numpy as np
 
 #'''
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(25, GPIO.OUT, initial=GPIO.HIGH)
+GPIO.setup(21, GPIO.IN)
 
-time.sleep(1)
-GPIO.output(25, GPIO.LOW)
-
-time.sleep(1)
-GPIO.output(25, GPIO.HIGH)
-
-time.sleep(1)
-GPIO.output(25, GPIO.LOW)
 
 imu.init()
 clb = []
