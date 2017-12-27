@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import drivers.pololu_minIMU as imu
+import drivers.pololu_driver as drv
 import numpy as np
 '''
 GPIO.setmode(GPIO.BCM)
@@ -40,7 +41,7 @@ for i in range(100):
     V = np.mean(np.array(V), axis=0) - clb
     print(V)
 '''
-
+'''
 print("LED DIMMER USING PULSE WIDTH MODULATION")
 
 GPIO.setmode(GPIO.BCM)   # This example uses the BCM pin numbering
@@ -97,3 +98,27 @@ time.sleep(3)            # Three seconds till the next change
 pwm.stop()               # Turn PWM off
 
 GPIO.cleanup()           # Always clean up at the end of programs.
+'''
+
+print('started')
+time.sleep(3)
+
+print('speed 1')
+drv.motors.set_speeds(1)
+time.sleep(3)
+
+print('speed 2')
+drv.motors.set_speeds(1)
+time.sleep(3)
+
+
+print('speed -1')
+drv.motors.set_speeds(1)
+time.sleep(3)
+
+
+print('speed -2')
+drv.motors.set_speeds(1)
+time.sleep(3)
+
+GPIO.cleanup()
