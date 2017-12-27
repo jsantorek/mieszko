@@ -107,18 +107,18 @@ print('speed 1')
 drv.motors.set_speeds(1, 1)
 time.sleep(3)
 
-print('speed 2')
-drv.motors.set_speeds(1, 1)
+print('speed 10')
+drv.motors.set_speeds(10, 10)
 time.sleep(3)
 
 
-print('speed -1')
-drv.motors.set_speeds(1, 1)
+print('speed -10')
+drv.motors.set_speeds(-10, -10)
 time.sleep(3)
 
 
-print('speed -2')
-drv.motors.set_speeds(1, 1)
+print('speed -20')
+drv.motors.set_speeds(-20, -20)
 time.sleep(3)
 
 GPIO.cleanup()
