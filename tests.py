@@ -55,7 +55,7 @@ def sharp_test():
         v.append(shp.whiskers.whisker1.read())
         time.sleep(0.1)
     print(v)
-    print("Whisker1 reading: {}".format(np.mean(np.ndarray(v))))
+    print("Whisker1 reading: {}".format(np.mean(v)))
 
     v = []
     print("Reading Whisker2 for 1 second")
@@ -63,7 +63,7 @@ def sharp_test():
         v.append(shp.whiskers.whisker2.read())
         time.sleep(0.1)
     print(v)
-    print("Whisker2 reading: {}".format(np.mean(np.ndarray(v))))
+    print("Whisker2 reading: {}".format(np.mean(v)))
 
     v = []
     print("Reading Whisker3 for 1 second")
@@ -71,14 +71,14 @@ def sharp_test():
         v.append(shp.whiskers.whisker3.read())
         time.sleep(0.1)
     print(v)
-    print("Whisker3 reading: {}".format(np.mean(np.ndarray(v))))
+    print("Whisker3 reading: {}".format(np.mean(v)))
 
     v = []
     print("Reading Whisker4 for 1 second")
     for i in range(10):
         v.append(shp.whiskers.whisker4.read())
         time.sleep(0.1)
-    print("Whisker4 reading: {}".format(np.mean(np.array(v))))
+    print("Whisker4 reading: {}".format(np.mean(v)))
 
     v = []
     print("Reading Whisker5 for 1 second")
@@ -86,7 +86,7 @@ def sharp_test():
         v.append(shp.whiskers.whisker5.read())
         time.sleep(0.1)
     print(v)
-    print("Whisker5 reading: {}".format(np.mean(np.array(v))))
+    print("Whisker5 reading: {}".format(np.mean(v)))
 
     v = []
     print("Reading all whiskers for 1 second")
