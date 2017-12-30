@@ -94,6 +94,6 @@ def sharp_test():
         v.append(shp.whiskers.read())
         time.sleep(0.1)
     print(v)
-    print("Whisker1 reading: " + str(np.mean(np.array(v), axis=1).tolist()))
+    print("Whisker1 reading: " + str(np.mean(v, axis=0)))
 
     print("Sharp tests finished")
