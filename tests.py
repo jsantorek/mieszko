@@ -54,7 +54,6 @@ def sharp_test():
     for i in range(10):
         v.append(shp.whiskers.whisker1.read())
         time.sleep(0.1)
-    print(v)
     print("Whisker1 reading: {}".format(np.mean(v)))
 
     v = []
@@ -62,7 +61,6 @@ def sharp_test():
     for i in range(10):
         v.append(shp.whiskers.whisker2.read())
         time.sleep(0.1)
-    print(v)
     print("Whisker2 reading: {}".format(np.mean(v)))
 
     v = []
@@ -70,7 +68,6 @@ def sharp_test():
     for i in range(10):
         v.append(shp.whiskers.whisker3.read())
         time.sleep(0.1)
-    print(v)
     print("Whisker3 reading: {}".format(np.mean(v)))
 
     v = []
@@ -85,7 +82,6 @@ def sharp_test():
     for i in range(10):
         v.append(shp.whiskers.whisker5.read())
         time.sleep(0.1)
-    print(v)
     print("Whisker5 reading: {}".format(np.mean(v)))
 
     v = []
@@ -93,7 +89,6 @@ def sharp_test():
     for i in range(10):
         v.append(shp.whiskers.read())
         time.sleep(0.1)
-    print(v)
     print("Whisker1 reading: " + str(np.mean(v, axis=0)))
 
     print("Sharp tests finished")
