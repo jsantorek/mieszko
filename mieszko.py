@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import drivers.pololu_minIMU as imu
+import drivers.pololu_imu as imu
 import numpy as np
 
 #'''

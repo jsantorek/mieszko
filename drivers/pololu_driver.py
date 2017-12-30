@@ -1,12 +1,11 @@
 import RPi.GPIO as GPIO
 
-# Motor speeds for this library are specified as numbers
-# between -MAX_SPEED and MAX_SPEED, inclusive.
-# _max_speed = 480  # 19.2 MHz / 2 / 480 = 20 kHz
-_max_speed = 480
-MAX_SPEED = _max_speed
-
 io_initialized = False
+
+M1_SF = 5
+M1_PWM = 12
+M2_SF = 6
+M2_PWM = 13
 
 
 def io_init():
@@ -16,20 +15,17 @@ def io_init():
 
     GPIO.setmode(GPIO.BCM)
 
-    GPIO.setup(12, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
+    GPIO.setup(M1_SF, GPIO.OUT)
+    GPIO.setup(M2_SF, GPIO.OUT)
 
-    GPIO.setup(5, GPIO.OUT)
-    GPIO.setup(6, GPIO.OUT)
+    GPIO.setup(M1_PWM, GPIO.OUT)
+    GPIO.setup(M2_PWM, GPIO.OUT)
 
     io_initialized = True
 
 
 class Motor(object):
-    MAX_SPEED = _max_speed
-
     def __init__(self, pwm_pin, dir_pin):
-        io_init()
         self.dir_pin = dir_pin
         self.pwm = GPIO.PWM(pwm_pin, 10)
         self.pwm.start(0)
@@ -39,19 +35,15 @@ class Motor(object):
             dir_value = GPIO.HIGH
         else:
             dir_value = GPIO.LOW
-        if speed > MAX_SPEED:
-            speed = MAX_SPEED
-
         GPIO.output(self.dir_pin, dir_value)
         self.pwm.ChangeDutyCycle(abs(speed))
 
 
 class Motors(object):
-    MAX_SPEED = _max_speed
-
     def __init__(self):
-        self.motor1 = Motor(12, 5)
-        self.motor2 = Motor(13, 6)
+        io_init()
+        self.motor1 = Motor(M1_PWM, M1_SF)
+        self.motor2 = Motor(M2_PWM, M2_SF)
 
     def set_speeds(self, m1_speed, m2_speed):
         self.motor1.set_speed(m1_speed)
