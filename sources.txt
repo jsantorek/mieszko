@@ -12,3 +12,4 @@ http://abyz.me.uk/rpi/pigpio/python.html
 Libraries:
 https://github.com/pololu/lsm6-arduino
 https://github.com/pololu/lis3mdl-arduino
+https://github.com/pololu/dual-mc33926-motor-driver-rpi/blob/master/dual_mc33926_rpi.py
