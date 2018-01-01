@@ -99,21 +99,25 @@ def sharp_test():
 
 def imu_test():
     print("Imu tests started")
+    imu.init()
     try:
         print("Accelerator results")
         while True:
+            time.sleep(0.1)
             print(str(imu.read_acc()))
     except KeyboardInterrupt:
         pass
     try:
         print("Gyroscope results")
         while True:
+            time.sleep(0.1)
             print(str(imu.read_gyr()))
     except KeyboardInterrupt:
         pass
     try:
         print("Magnetometer results")
         while True:
+            time.sleep(0.1)
             print(str(imu.read_mag()))
     except KeyboardInterrupt:
         pass
