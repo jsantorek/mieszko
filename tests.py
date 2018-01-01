@@ -7,6 +7,7 @@ import time
 
 def motor_test():
     print("Motor tests started")
+    drv.motors.enable()
 
     print("Both slow forward 3 seconds")
     drv.motors.set_speeds(10, 10)
@@ -45,6 +46,7 @@ def motor_test():
     time.sleep(1)
 
     print("Motor tests finished")
+    drv.motors.disable()
 
 
 def sharp_test():
