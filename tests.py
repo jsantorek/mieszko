@@ -1,11 +1,12 @@
 import drivers.pololu_driver as drv
 import drivers.pololu_sharp as shp
+import drivers.pololu_imu as imu
 import numpy as np
 import time
 
 
 def motor_test():
-    print("Motor tests start")
+    print("Motor tests started")
 
     print("Both slow forward 3 seconds")
     drv.motors.set_speeds(10, 10)
@@ -47,7 +48,7 @@ def motor_test():
 
 
 def sharp_test():
-    print("Sharp tests start")
+    print("Sharp tests started")
 
     v = []
     print("Reading Whisker1 for 1 second")
@@ -92,3 +93,11 @@ def sharp_test():
     print("Whisker1 reading: " + str(np.mean(v, axis=0)))
 
     print("Sharp tests finished")
+
+
+def imu_test():
+    print("Sharp tests started")
+
+
+
+    print("Motor tests finished")
