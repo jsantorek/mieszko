@@ -102,14 +102,14 @@ def imu_test():
     imu.init()
     try:
         print("Accelerator results")
-        while False:
+        while True:
             time.sleep(0.2)
             print(str(imu.read_acc()))
     except KeyboardInterrupt:
         pass
     try:
         print("Gyroscope results")
-        while False:
+        while True:
             time.sleep(0.2)
             print(str(imu.read_gyr()))
     except KeyboardInterrupt:
