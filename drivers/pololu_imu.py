@@ -131,7 +131,6 @@ def read_mag():
 
 
 def to_int(high, low):
-    print(high, low)
     i = (high << 8 | low)
     if high & 0x80:
         i -= 0x10000
