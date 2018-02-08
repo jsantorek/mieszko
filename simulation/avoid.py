@@ -1,7 +1,7 @@
 import random
 import csv
 
-v_dir = -100
+v_dir = -1
 v_in = []
 v_out = []
 

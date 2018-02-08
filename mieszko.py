@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 from sklearn.neighbors import KNeighborsRegressor
-from sklearn.neural_network import MLPClassifier
+from sklearn.neural_network import MLPRegressor
 from sklearn.cluster import KMeans
 import drivers.pololu_sharp as shp
 import drivers.pololu_driver as drv
@@ -45,17 +45,17 @@ def load_classifier(mode):
         cls1 = KMeans()
         cls2 = KMeans()
     if mode == 'ann':
-        cls1 = MLPClassifier()
-        cls2 = MLPClassifier()
+        cls1 = MLPRegressor(solver='lbfgs')
+        cls2 = MLPRegressor(solver='lbfgs')
     cls1.fit(train_vectors, train_labels[:, 0])
     cls2.fit(train_vectors, train_labels[:, 1])
 
 
-load_set('avoid')
+load_set('stop')
 load_classifier('knn')
 for v in test_vectors:
-    v1 = int(cls1.predict(np.array(v).reshape(1, -1))[0])
-    v2 = int(cls2.predict(np.array(v).reshape(1, -1))[0])
+    v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
+    v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
     print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
 
 t0 = time.time()
@@ -63,10 +63,10 @@ time.sleep(3)
 drv.motors.enable()
 while True:
     v = shp.whiskers.read()
-    v1 = int(cls1.predict(np.array(v).reshape(1, -1))[0])
-    v2 = int(cls2.predict(np.array(v).reshape(1, -1))[0])
+    v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
+    v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
     print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
-    drv.motors.set_speeds(v1, v2)
+    drv.motors.set_speeds(100*v1, 100*v2)
     if time.time() - t0 > 30:
         break
     else:
