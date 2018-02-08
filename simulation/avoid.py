@@ -1,7 +1,7 @@
 import random
 import csv
 
-v_dir = 100
+v_dir = -100
 v_in = []
 v_out = []
 
@@ -61,12 +61,12 @@ for m in range(30):
     v_in.append(v)
     v_out.append([-0.4 * v_dir, -v_dir])
 
-with open('vec.txt', 'w', newline='') as vec:
+with open('../training/avoid/vec.txt', 'w', newline='') as vec:
     writer = csv.writer(vec, delimiter=',')
     for v in v_in:
         writer.writerow(v)
 
-with open('lab.txt', 'w', newline='') as lab:
+with open('../training/avoid/lab.txt', 'w', newline='') as lab:
     writer = csv.writer(lab, delimiter=',')
     for v in v_out:
         writer.writerow(v)

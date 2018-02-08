@@ -67,9 +67,9 @@ while True:
     v2 = int(cls2.predict(np.array(v).reshape(1, -1))[0])
     print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
     drv.motors.set_speeds(v1, v2)
-    if time.time() - t0 > 10:
+    if time.time() - t0 > 30:
         break
     else:
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 GPIO.cleanup()
