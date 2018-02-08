@@ -1,26 +1,33 @@
 import random
 import csv
 
-v_dir = 1
+v_dir = 100
 v_in = []
 v_out = []
 
-print('\nrandom distribution - stop robot')
+print('\nnothing - stop')
+for h in range(5):
+    v = [random.randrange(9, 11) / 10 for _ in range(5)]
+    print(v)
+    v_in.append(v)
+    v_out.append([0, 0])
+
+print('\nrandom distribution - stop')
 for i in range(5):
     v = [random.randrange(0, 11) / 10 for _ in range(5)]
     print(v)
     v_in.append(v)
     v_out.append([0, 0])
 
-print('\nnothing or small noise - forward')
-for j in range(25):
+print('\nnothing or small noise - stop')
+for j in range(50):
     v = [random.randrange(7, 11) / 10 for _ in range(random.randrange(0, 3))]
     while len(v) < 5:
-        v.append(0)
+        v.append(1)
     random.shuffle(v)
     print(v)
     v_in.append(v)
-    v_out.append([v_dir, v_dir])
+    v_out.append([0, 0])
 
 print('\nsignal registered in front - full backward')
 for k in range(30):
@@ -42,7 +49,7 @@ for l in range(30):
          1]
     print(v)
     v_in.append(v)
-    v_out.append([-v_dir, -0.5 * v_dir])
+    v_out.append([-v_dir, -0.4 * v_dir])
 
 for m in range(30):
     v = [1,
@@ -52,7 +59,7 @@ for m in range(30):
          random.randrange(0, 2) / 10]
     print(v)
     v_in.append(v)
-    v_out.append([-0.5 * v_dir, -v_dir])
+    v_out.append([-0.4 * v_dir, -v_dir])
 
 with open('vec.txt', 'w', newline='') as vec:
     writer = csv.writer(vec, delimiter=',')
