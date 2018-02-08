@@ -2,4 +2,4 @@
 
 git pull origin
 
-python mieszko.py
+python3 -u mieszko.py

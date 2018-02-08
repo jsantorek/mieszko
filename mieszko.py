@@ -60,10 +60,12 @@ for v in test_vectors:
 
 t0 = time.time()
 time.sleep(3)
+drv.motors.enable()
 while True:
     v = shp.whiskers.read()
     v1 = int(cls1.predict(np.array(v).reshape(1, -1))[0])
     v2 = int(cls2.predict(np.array(v).reshape(1, -1))[0])
+    print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
     drv.motors.set_speeds(v1, v2)
     if time.time() - t0 > 10:
         break
