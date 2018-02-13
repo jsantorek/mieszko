@@ -8,34 +8,35 @@ import time
 def motor_test():
     print("Motor tests started")
     drv.motors.enable()
-
-    print("Both slow forward 3 seconds")
-    drv.motors.set_speeds(10, 10)
     time.sleep(3)
 
-    print("Both fast forward 1 second")
+    print("Both slow forward 5 seconds")
+    drv.motors.set_speeds(50, 50)
+    time.sleep(5)
+
+    print("Both fast forward 5 seconds")
     drv.motors.set_speeds(100, 100)
-    time.sleep(1)
+    time.sleep(5)
 
-    print("Both slow backward 3 seconds")
-    drv.motors.set_speeds(-10, -10)
-    time.sleep(3)
+    print("Both slow backward 5 seconds")
+    drv.motors.set_speeds(-50, -50)
+    time.sleep(5)
 
-    print("Both fast backward 1 seconds")
+    print("Both fast backward 5 seconds")
     drv.motors.set_speeds(-100, -100)
-    time.sleep(1)
+    time.sleep(5)
 
     print("Both stop 3 seconds")
     drv.motors.set_speeds(0, 0)
     time.sleep(3)
 
-    print("Motor1 forward, Motor2 backward 2 seconds")
-    drv.motors.set_speeds(10, -10)
-    time.sleep(2)
+    print("Motor1 forward, Motor2 backward 5 seconds")
+    drv.motors.set_speeds(50, -50)
+    time.sleep(5)
 
-    print("Motor1 backward, Motor2 forward 2 seconds")
-    drv.motors.set_speeds(-10, 10)
-    time.sleep(2)
+    print("Motor1 backward, Motor2 forward 5 seconds")
+    drv.motors.set_speeds(-50, 50)
+    time.sleep(5)
 
     print("Motor1 stop")
     drv.motors.motor1.set_speed(0)

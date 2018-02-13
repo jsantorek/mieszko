@@ -9,20 +9,11 @@ import numpy as np
 
 train_vectors = []
 train_labels = []
-test_vectors = [
-    [1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 1]
-]
 cls1 = None
 cls2 = None
 
 
-def load_set(name):
+def load_sets(name):
     global train_vectors
     global train_labels
     with open('training/' + name + '/lab.txt', 'r') as lab:
@@ -35,7 +26,7 @@ def load_set(name):
         train_vectors = np.array(train_vectors)
 
 
-def load_classifier(mode):
+def load_classifiers(mode):
     global cls1
     global cls2
     if mode == 'knn':
@@ -51,25 +42,62 @@ def load_classifier(mode):
     cls2.fit(train_vectors, train_labels[:, 1])
 
 
-load_set('stop')
-load_classifier('knn')
-for v in test_vectors:
-    v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
-    v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
-    print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
+def diagnose_classifiers():
+    global cls1
+    global cls2
+    with open('diagnostics.txt', 'w') as of:
+        of.write('Classifier 1 diagnostics:\n')
+        i = np.identity(5)
+        o = np.ones_like(i)
+        for x in range(0, 101):
+            x /= 100
+            xm = o - i * x
+            of.write('{}\t{}\t{}\t{}\t{}\t{}\n'
+                     .format(x, cls1.predict(xm[:, 0].reshape(1, -1))[0], cls1.predict(xm[:, 1].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 2].reshape(1, -1))[0], cls1.predict(xm[:, 3].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 4].reshape(1, -1))[0]))
+        of.write('\nClassifier 2 diagnostics:\n')
+        for x in range(0, 101):
+            x /= 100
+            xm = o - i * x
+            of.write('{}\t{}\t{}\t{}\t{}\t{}\n'
+                     .format(x,
+                             cls1.predict(xm[:, 0].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 1].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 2].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 3].reshape(1, -1))[0],
+                             cls1.predict(xm[:, 4].reshape(1, -1))[0]))
 
+
+def test_classifiers():
+    test_vectors = [
+        [1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 1]
+    ]
+    for v in test_vectors:
+        print('{} => [{}, {}]'.format(str(v),
+                                      str(cls1.predict(np.array(v).reshape(1, -1))[0]),
+                                      str(cls2.predict(np.array(v).reshape(1, -1))[0])))
+
+
+load_sets('follow')
+load_classifiers('som')
+test_classifiers()
+diagnose_classifiers()
+exit(0)
 t0 = time.time()
 time.sleep(3)
 drv.motors.enable()
-while True:
+while time.time() - t0 < 30:
     v = shp.whiskers.read()
     v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
     v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
     print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
-    drv.motors.set_speeds(100*v1, 100*v2)
-    if time.time() - t0 > 30:
-        break
-    else:
-        time.sleep(0.1)
+    drv.motors.set_speeds(100 * v1, 100 * v2)
 
 GPIO.cleanup()
