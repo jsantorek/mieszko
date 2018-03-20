@@ -62,11 +62,11 @@ def diagnose_classifiers():
             xm = o - i * x
             of.write('{}\t{}\t{}\t{}\t{}\t{}\n'
                      .format(x,
-                             cls1.predict(xm[:, 0].reshape(1, -1))[0],
-                             cls1.predict(xm[:, 1].reshape(1, -1))[0],
-                             cls1.predict(xm[:, 2].reshape(1, -1))[0],
-                             cls1.predict(xm[:, 3].reshape(1, -1))[0],
-                             cls1.predict(xm[:, 4].reshape(1, -1))[0]))
+                             cls2.predict(xm[:, 0].reshape(1, -1))[0],
+                             cls2.predict(xm[:, 1].reshape(1, -1))[0],
+                             cls2.predict(xm[:, 2].reshape(1, -1))[0],
+                             cls2.predict(xm[:, 3].reshape(1, -1))[0],
+                             cls2.predict(xm[:, 4].reshape(1, -1))[0]))
 
 
 def test_classifiers():
@@ -86,10 +86,10 @@ def test_classifiers():
 
 
 load_sets('follow')
-load_classifiers('som')
+load_classifiers('knn')
 test_classifiers()
-diagnose_classifiers()
-exit(0)
+#diagnose_classifiers()
+#exit(0)
 t0 = time.time()
 time.sleep(3)
 drv.motors.enable()
@@ -99,5 +99,4 @@ while time.time() - t0 < 30:
     v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
     print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
     drv.motors.set_speeds(100 * v1, 100 * v2)
-
 GPIO.cleanup()
