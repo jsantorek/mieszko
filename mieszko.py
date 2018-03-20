@@ -85,6 +85,19 @@ def test_classifiers():
                                       str(cls2.predict(np.array(v).reshape(1, -1))[0])))
 
 
+def start(t=30):
+    t0 = time.time()
+    drv.motors.enable()
+    while time.time() - t0 < t:
+        v = shp.whiskers.read()
+        v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
+        v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
+        print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
+        drv.motors.set_speeds(100 * v1, 100 * v2)
+    drv.motors.disable()
+    GPIO.cleanup()
+
+
 def p1():
     load_sets('follow')
     load_classifiers('knn')
@@ -96,22 +109,23 @@ def p1():
         v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
         v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
         print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
-        drv.motors.set_speeds(100 * v1, 100 * v2)
+        drv.motors.set_speeds(80 * v2, 80 * v1)
+    drv.motors.disable()
     GPIO.cleanup()
     exit(0)
 
 
 def p2():
     load_sets('avoid')
-    load_classifiers('ann')
+    load_classifiers('knn')
     t0 = time.time()
-    time.sleep(3)
     drv.motors.enable()
     while time.time() - t0 < 30:
         v = shp.whiskers.read()
         v1 = cls1.predict(np.array(v).reshape(1, -1))[0]
         v2 = cls2.predict(np.array(v).reshape(1, -1))[0]
         print('{} => [{}, {}]'.format(str(v), str(v1), str(v2)))
-        drv.motors.set_speeds(100 * v1, 100 * v2)
+        drv.motors.set_speeds(80 * v1, 80 * v2)
+    drv.motors.disable()
     GPIO.cleanup()
     exit(0)

@@ -43,10 +43,11 @@ class Motor(object):
     def set_speed(self, speed):
         if speed < 0:
             dir_value = GPIO.HIGH
+            speed = abs(speed)
         else:
             dir_value = GPIO.LOW
         GPIO.output(self.dir_pin, dir_value)
-        self.pwm.ChangeDutyCycle(abs(speed))
+        self.pwm.ChangeDutyCycle(max(0, min(speed, 100)))
 
 
 class Motors(object):
